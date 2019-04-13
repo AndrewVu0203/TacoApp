@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jsonParse(){
-        String url = "https://api.myjson.com/bins/1g29a4";
+        String url = "https://api.myjson.com/bins/hj470";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
