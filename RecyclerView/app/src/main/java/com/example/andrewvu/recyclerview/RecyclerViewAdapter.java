@@ -18,16 +18,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private static final String TAG = "RecylerViewAdapter";
+    private static final String TAG = "RecyclerViewAdapter";
 
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContext;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<String> mImagesName, ArrayList<String> mImages) {
-        this.mImageNames = mImageNames;
-        this.mImages = mImages;
-        this.mContext = mContext;
+    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
+        mImageNames = imageNames;
+        mImages = images;
+        mContext = context;
     }
 
     @Override
