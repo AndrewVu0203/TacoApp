@@ -133,7 +133,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             });
             mQueue.add(request);
-
         }
     }
 }

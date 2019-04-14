@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "739358150982",
+    "firebase_url": "https://rowdyhack-525fd.firebaseio.com",
+    "project_id": "rowdyhack-525fd",
+    "storage_bucket": "rowdyhack-525fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739358150982:android:a7ad8199e04de88c",
+        "android_client_info": {
+          "package_name": "com.example.andrewvu.rowdyhackapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739358150982-egds9m58d039jah1ev3dkptl9k1d71a9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgDJ79hy-2OYVqkvjifvHv6g31VRal7AU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739358150982-egds9m58d039jah1ev3dkptl9k1d71a9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,18 +10,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
-    // what does requestQueue actually do ?
-
-    // requestQueue
-        // move to MainActivity
-    // move then call method from another activity
-        // 'com.example.andrewvu.rowdyhackapp.MainActivity' is not an enclosing class
-    // pass Context
-    // create Context in MainActivity constructor
 
     private static final String TAG = "MainActivity";
     private ArrayList<String> mNames = new ArrayList<>();
@@ -35,6 +32,16 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         initImageBitmaps();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference dbRef = database.getReference();
+        dbRef = database.getReference("/test/data/message1");
+        dbRef.setValue("Hello");
+
+        // get value
+
+
+        // output
 
     }
 
