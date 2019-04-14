@@ -38,11 +38,6 @@ public class MainActivity extends AppCompatActivity {
         dbRef = database.getReference("/test/data/message1");
         dbRef.setValue("Hello");
 
-        // get value
-
-
-        // output
-
     }
 
     private void initImageBitmaps(){

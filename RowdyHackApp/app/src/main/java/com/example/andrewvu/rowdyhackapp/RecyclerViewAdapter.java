@@ -3,6 +3,7 @@ package com.example.andrewvu.rowdyhackapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +34,8 @@ import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.zip.Adler32;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -35,7 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by User on 1/1/2018.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
 
@@ -45,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private RequestQueue mQueue;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> itemText ) {
+    public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> itemText) {
         mImageNames = imageNames;
         mImages = images;
         mContext = context;
@@ -86,7 +94,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mImageNames.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView image;
         TextView imageName;
@@ -102,37 +110,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             mQueue = Volley.newRequestQueue(mContext);
 
-           jsonParse();
+            jsonParseFromFirebase();
         }
 
-        private void jsonParse(){
-            String url = "https://api.myjson.com/bins/hj470";
+        private void jsonParseFromFirebase() {
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("employees");
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject employee = jsonArray.getJSONObject(i);
-                            String firstName = employee.getString("firstname");
-                            int age = employee.getInt("age");
-                            String mail = employee.getString("mail");
-
-                            itemTextView.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
+                    itemTextView.append("offers are: " + data.get("offers"));
                 }
-            }, new Response.ErrorListener() {
+
                 @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
             });
-            mQueue.add(request);
+
+            // write works, read does not work
+            mDatabase.child("test").setValue("Hello 4:47");
+
         }
     }
 }
