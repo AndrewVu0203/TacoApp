@@ -24,6 +24,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContext;
 
+
     public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images) {
         mImageNames = imageNames;
         mImages = images;

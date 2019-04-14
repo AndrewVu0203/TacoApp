@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,9 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: started.");
 
-        mTextView = findViewById(R.id.image_name);
-        mTextView1 = findViewById(R.id.image_name1);
-        mTextView2 = findViewById(R.id.image_name2);
+        final LayoutInflater factory = getLayoutInflater();
+
+        final View textEntryView = factory.inflate(R.layout.layout_listitem, null);
+
+        mTextView = (TextView) textEntryView.findViewById(R.id.image_name);
+        mTextView1 = (TextView) textEntryView.findViewById(R.id.image_name1);
+        mTextView2 = (TextView) textEntryView.findViewById(R.id.image_name2);
+
         mParseButton = findViewById(R.id.buttonParse);
 
         mQueue = Volley.newRequestQueue(this);
