@@ -3,6 +3,9 @@ package com.example.andrewvu.rowdyhackapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,9 +35,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Random;
 import java.util.zip.Adler32;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -100,6 +109,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView imageName;
         RelativeLayout parentLayout;
         TextView itemTextView;
+        int i = 0;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -114,18 +124,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
         private void jsonParseFromFirebase() {
-
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+            Random random = new Random();
+            int ranNum = random.nextInt(20);
+            i = ranNum;
+            final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
             mDatabase.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Map<String, String> data = (Map<String, String>) dataSnapshot.getValue();
-                    itemTextView.append("offers are: " + data.get("offers"));
+                        String path = String.format("HEBCoupons/%d/price", i);
+                        Double data = (Double) dataSnapshot.child(path).getValue();
+                        itemTextView.append("Coupons: " +  data);
+
+                        String pathSecond = String.format("HEBCoupons/%d/product", i);
+                        String dataSecond = (String) dataSnapshot.child(pathSecond).getValue();
+                        imageName.append("" + dataSecond);
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    Log.w(TAG, "Failed to read value.", databaseError.toException());
                 }
             });
 
