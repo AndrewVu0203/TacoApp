@@ -14,13 +14,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    // it is completely the same, but TextView different only
+    // what does requestQueue actually do ?
+    // clickable button
+    // get JSON data and output the data into specific TextView
+        // but my TextView is not in activity_main, and I don't know how to handle Adapter
+        // can i use 2 activites ?
 
     private static final String TAG = "MainActivity";
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
     private ArrayList<String> mItemTextView = new ArrayList<>();
-    private TextView itemTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

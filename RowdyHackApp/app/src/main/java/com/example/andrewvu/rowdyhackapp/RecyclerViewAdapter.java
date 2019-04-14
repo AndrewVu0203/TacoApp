@@ -75,7 +75,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mImageNames.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         CircleImageView image;
