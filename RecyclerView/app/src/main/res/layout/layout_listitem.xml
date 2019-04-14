@@ -12,14 +12,36 @@
         android:src="@mipmap/ic_launcher"/>
 
     <TextView
+        android:id="@+id/image_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Canada"
-        android:id="@+id/image_name"
+        android:text="Product"
         android:layout_toRightOf="@+id/image"
         android:textColor="#000"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/image_name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+
+        />
+
+    <TextView
+        android:id="@+id/image_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coupon"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+
+        />
 
 </RelativeLayout>
