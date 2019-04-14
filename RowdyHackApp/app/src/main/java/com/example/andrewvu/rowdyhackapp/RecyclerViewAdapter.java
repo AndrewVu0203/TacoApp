@@ -8,12 +8,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Array;
@@ -33,6 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mImages = new ArrayList<>();
     private ArrayList<String> mItemTextView = new ArrayList<>();
     private Context mContext;
+    private RequestQueue mQueue;
 
     public RecyclerViewAdapter(Context context, ArrayList<String> imageNames, ArrayList<String> images, ArrayList<String> itemText ) {
         mImageNames = imageNames;
@@ -88,6 +99,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageName = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
             itemTextView = itemView.findViewById(R.id.itemTextView);
+
+            mQueue = Volley.newRequestQueue(mContext);
+
+           jsonParse();
+        }
+
+        private void jsonParse(){
+            String url = "https://api.myjson.com/bins/hj470";
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("employees");
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject employee = jsonArray.getJSONObject(i);
+                            String firstName = employee.getString("firstname");
+                            int age = employee.getInt("age");
+                            String mail = employee.getString("mail");
+
+                            itemTextView.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
+            mQueue.add(request);
 
         }
     }

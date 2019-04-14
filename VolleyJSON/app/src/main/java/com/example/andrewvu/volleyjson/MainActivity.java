@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
                 jsonParse();
             }
         });
+
+
+
     }
 
     private void jsonParse(){
@@ -49,12 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject employee = jsonArray.getJSONObject(i);
-
-                        String firstName = employee.getString("firstname");
+// get JSON and store in variable
+                       String firstName = employee.getString("firstname");
                         int age = employee.getInt("age");
                         String mail = employee.getString("mail");
 
                         mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
+// attach JSON t
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

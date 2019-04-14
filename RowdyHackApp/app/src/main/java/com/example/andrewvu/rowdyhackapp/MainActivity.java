@@ -15,10 +15,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     // what does requestQueue actually do ?
-    // clickable button
-    // get JSON data and output the data into specific TextView
-        // but my TextView is not in activity_main, and I don't know how to handle Adapter
-        // can i use 2 activites ?
+
+    // requestQueue
+        // move to MainActivity
+    // move then call method from another activity
+        // 'com.example.andrewvu.rowdyhackapp.MainActivity' is not an enclosing class
+    // pass Context
+    // create Context in MainActivity constructor
 
     private static final String TAG = "MainActivity";
     private ArrayList<String> mNames = new ArrayList<>();
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         initImageBitmaps();
+
     }
 
     private void initImageBitmaps(){
